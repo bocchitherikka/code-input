@@ -334,7 +334,7 @@ class PostPagesTests(TestCase):
         followings_count = Follow.objects.count()
         follow.delete()
         new_followings_count = Follow.objects.count()
-        self.assertEqual(followings_count, new_followings_count+1)
+        self.assertEqual(followings_count, new_followings_count + 1)
 
     def test_posts_for_followers(self):
         """Подписчики видят в ленте посты автора."""
