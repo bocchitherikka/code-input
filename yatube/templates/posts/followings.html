@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новости с ваших подписок{% endblock %}
+{% block body %}
+  <div class="container py-5">
+    {% include 'includes/switcher.html' %}
+    <h1>Посты пользователей, на которых вы подписаны</h1>
+    <br>
+    {% for post in page_obj %}
+      {% include 'includes/post.html' %}
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+    {% include 'includes/paginator.html' %}
+  </div>
+{% endblock %}

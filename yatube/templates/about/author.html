@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block body %}
+  <div class="container py-5">
+    <h1>Привет, я - автор</h1>
+    <p style="font-size:20px">
+      Привет, я - автор этого чуда мира IT. Я хотел бы расписать десять
+      абзацев текста, где рассказал бы о себе и всё такое, но я просто скажу,
+      что являюсь фанатом Викнда и прикреплю сюда его альбомы
+      <span style="color:#CC0033; font-weight:bold"> Starboy </span> и
+      <span style="color:#000066; font-weight:bold"> Dawn FM</span>.
+    </p>
+    <br>
+    <div class="row">
+      <div class="col-4">
+        <p style="font-size:28px; text-align:center">
+          <a href="https://music.youtube.com/playlist?list=OLAK5uy_nF6-ijLz9eO-DMZzhzneNclNBj74Jvjgo" target="_blank" style="text-decoration:none">
+            <img src="{% static 'about/dawn-fm.png' %}" width="300" height="300">
+            <br>
+            <span style="color:#000066; font-weight:bold; text-align:center">Dawn FM</span>
+          </a>
+        </p>
+      </div>
+      <div class="col-4">
+        <p style="font-size:28px; text-align:center">
+          <a href="https://music.youtube.com/playlist?list=OLAK5uy_nl-XrT4Q4vuhtuzHGfIuY5a0Rao4J8LdM" target="_blank" style="text-decoration:none">
+            <img src="{% static 'about/starboy.png' %}" width="300" height="300">
+            <br>
+            <span style="color:#CC0033; font-weight:bold">Starboy</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

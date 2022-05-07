@@ -1,0 +1,22 @@
+{% if user.is_authenticated %}
+  <div class="row my-3">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link {% if main_page %}active{% endif %}"
+          href="{% url 'posts:main_page' %}"
+        >
+          Все авторы
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+           class="nav-link {% if followings %}active{% endif %}"
+           href="{% url 'posts:followings' %}"
+        >
+          Ваши подписки
+        </a>
+      </li>
+    </ul>
+  </div>
+{% endif %}
