@@ -53,7 +53,7 @@ def profile(request, username):
             user=request.user,
             author=author
         )
-    except:
+    except Exception:
         follow = False
 
     following = False
