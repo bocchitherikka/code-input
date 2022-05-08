@@ -3,9 +3,9 @@
 {% block body %}
   <div class="container py-5">
     <h1>Ошибка 404</h1>
-    <p>Страницы с адресом {{ path }} не существует</p>
-    <p>
+    <h4>Страницы с адресом {{ path }} не существует</h4>
+    <h4>
       Идите на <a href="{% url 'posts:main_page' %}">главную</a>
-    </p>
+    </h4>
   </div>>
 {% endblock %}
