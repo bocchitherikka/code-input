@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load cache %}
+{% load static %}
 {% block title %}Последние обновления на сайте{% endblock title %}
 {% cache 20 index_page %}
   {% block body %}
