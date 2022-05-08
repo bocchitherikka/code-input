@@ -372,10 +372,12 @@ class PostPagesTests(TestCase):
 
     def test_user_cant_follow_himself(self):
         """Нельзя подписаться на самого себя."""
-        response = self.authorized_client.get(
+        first_count = Follow.objects.count()
+        self.authorized_client.get(
             reverse(
                 'posts:follow',
-                kwargs={'username': f'{self.user.username}'}
+                kwargs={'username': self.user.username}
             )
         )
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        second_count = Follow.objects.count()
+        self.assertEqual(first_count, second_count)
