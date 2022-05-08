@@ -379,3 +379,21 @@ class PostPagesTests(TestCase):
         )
         second_count = Follow.objects.count()
         self.assertEqual(first_count, second_count)
+
+    def test_user_cant_follow_twice(self):
+        """Нельзя два раза подписаться на автора."""
+        new_user = User.objects.create_user(username='new-user')
+        self.authorized_client.get(
+            reverse(
+                'posts:follow',
+                kwargs={'username': new_user.username}
+            )
+        )
+        self.authorized_client.get(
+            reverse(
+                'posts:follow',
+                kwargs={'username': new_user.username}
+            )
+        )
+        follows = Follow.objects.count()
+        self.assertEqual(follows, 1)
