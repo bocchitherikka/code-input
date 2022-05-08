@@ -1,38 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}Профиль пользователя {{ author.get_full_name }}{% endblock %}
 {% block body %}
-  <main>
-    <div class="container py-5">
-      <h1>
-        {{ author.get_full_name }}
-        {% if request.user != author %}
-          {% if following %}
-            <a
-              class="btn btn-lg btn-light"
-              href="{% url 'posts:unfollow' author.username %}" role="button"
-            >
-              Отписаться
-            </a>
-          {% else %}
-              <a
-                class="btn btn-lg btn-primary"
-                href="{% url 'posts:follow' author.username %}" role="button"
-              >
-                Подписаться
-              </a>
-           {% endif %}
-          {% endif %}
-        </h1>
-      <br>
-      <h3>Все посты пользователя {{ author.get_full_name }} </h3>
-      <h4>Всего постов: {{ num_of_posts }} </h4>
-      {% for post in page_obj %}
-        {% include 'includes/post.html' %}
-        {% if not forloop.last %}
-          <hr>
+  <div class="container py-5">
+    <h1>
+      {{ author.get_full_name }}
+      {% if request.user != author %}
+        {% if following %}
+          <a
+            class="btn btn-lg btn-light"
+            href="{% url 'posts:unfollow' author.username %}" role="button"
+          >
+            Отписаться
+          </a>
+        {% else %}
+          <a
+            class="btn btn-lg btn-primary"
+            href="{% url 'posts:follow' author.username %}" role="button"
+          >
+            Подписаться
+          </a>
         {% endif %}
-      {% endfor %}
-      {% include 'includes/paginator.html' %}
-    </div>
-  </main>
+      {% endif %}
+    </h1>
+    <br>
+    <h3>Все посты пользователя {{ author.get_full_name }} </h3>
+    <h4>Всего постов: {{ num_of_posts }} </h4>
+    {% for post in page_obj %}
+      {% include 'includes/post.html' %}
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+    {% include 'includes/paginator.html' %}
+  </div>
 {% endblock %}

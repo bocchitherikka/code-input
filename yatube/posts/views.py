@@ -8,11 +8,8 @@ from .utils import paginator
 
 def index(request):
     path = 'posts/index.html'
-
-    posts = Post.objects.all().order_by('-pub_date')
-
+    posts = Post.objects.order_by('-pub_date')
     page_obj = paginator(request, posts)
-
     main_page = True
     context = {
         'page_obj': page_obj,
@@ -23,13 +20,9 @@ def index(request):
 
 def group_posts(request, slug):
     path = 'posts/group_list.html'
-
     group = get_object_or_404(Group, slug=slug)
-
-    posts = Post.objects.filter(group=group).order_by('-pub_date')
-
+    posts = group.posts.order_by('-pub_date')
     page_obj = paginator(request, posts)
-
     context = {
         'group': group,
         'page_obj': page_obj,
@@ -39,27 +32,16 @@ def group_posts(request, slug):
 
 def profile(request, username):
     path = 'posts/profile.html'
-
     author = get_object_or_404(User, username=username)
-
-    num_of_posts = Post.objects.filter(author=author).count()
-
-    posts = Post.objects.filter(author=author).order_by('-pub_date')
-
+    num_of_posts = author.posts.all().count()
+    posts = author.posts.order_by('-pub_date')
     page_obj = paginator(request, posts)
-
-    try:
-        follow = Follow.objects.get(
-            user=request.user,
-            author=author
-        )
-    except Exception:
-        follow = False
-
     following = False
-    if follow:
+    if Follow.objects.filter(
+        user=request.user,
+        author=author
+    ).exists():
         following = True
-
     context = {
         'author': author,
         'num_of_posts': num_of_posts,
@@ -71,13 +53,9 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     path = 'posts/post_detail.html'
-
     form = CommentForm(request.POST or None)
-
     post = get_object_or_404(Post, pk=post_id)
-
-    comments = Comment.objects.filter(post=post).order_by('-created')
-
+    comments = post.comments.order_by('-created')
     context = {
         'post': post,
         'form': form,
@@ -89,18 +67,12 @@ def post_detail(request, post_id):
 @login_required
 def post_create(request):
     path = 'posts/create_post.html'
-
     form = PostForm(request.POST or None)
-
     if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
         post.save()
-
         return redirect('posts:profile', request.user)
-
-    form = PostForm()
-
     context = {'form': form}
     return render(request, path, context)
 
@@ -108,25 +80,18 @@ def post_create(request):
 @login_required
 def post_edit(request, post_id):
     path = 'posts/create_post.html'
-
     is_edit = True
-
     post = get_object_or_404(Post, pk=post_id)
-
     if request.user != post.author:
         return redirect('posts:post_detail', post_id)
-
     form = PostForm(
         request.POST or None,
         files=request.FILES or None,
         instance=post
     )
-
     if form.is_valid():
         form.save()
-
         return redirect('posts:post_detail', post_id)
-
     context = {
         'form': form,
         'post': post,
@@ -149,13 +114,10 @@ def add_comment(request, post_id):
 @login_required
 def followings_posts(request):
     path = 'posts/followings.html'
-
     posts = Post.objects.filter(
         author__following__user=request.user
     ).select_related('author').order_by('-pub_date')
-
     page_obj = paginator(request, posts)
-
     followings = True
     context = {
         'page_obj': page_obj,
@@ -166,7 +128,7 @@ def followings_posts(request):
 
 @login_required
 def author_follow(request, username):
-    author = User.objects.get(username=username)
+    author = get_object_or_404(User, username=username)
     if not Follow.objects.filter(
         user=request.user,
         author=author
@@ -181,7 +143,7 @@ def author_follow(request, username):
 
 @login_required
 def author_unfollow(request, username):
-    author = User.objects.get(username=username)
+    author = get_object_or_404(User, username=username)
     follow_to_be_deleted = Follow.objects.get(
         user=request.user,
         author=author
