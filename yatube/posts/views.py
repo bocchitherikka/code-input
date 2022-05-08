@@ -132,12 +132,11 @@ def author_follow(request, username):
     if not Follow.objects.filter(
         user=request.user,
         author=author
-    ).exists():
-        if request.user != author:
-            Follow.objects.create(
-                user=request.user,
-                author=author
-            )
+    ).exists() and request.user != author:
+        Follow.objects.create(
+            user=request.user,
+            author=author
+        )
     return redirect('posts:profile', username=username)
 
 
