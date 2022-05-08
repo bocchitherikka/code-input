@@ -37,7 +37,7 @@ def profile(request, username):
     posts = author.posts.order_by('-pub_date')
     page_obj = paginator(request, posts)
     following = False
-    if request.user.username and Follow.objects.filter(
+    if request.user.is_authenticated and Follow.objects.filter(
             user=request.user,
             author=author
     ).exists():
