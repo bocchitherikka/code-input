@@ -4,6 +4,8 @@ from django.test import Client, TestCase
 from django.urls import reverse
 from django import forms
 
+from http import HTTPStatus
+
 from ..models import Comment, Follow, Group, Post
 
 User = get_user_model()
@@ -367,3 +369,13 @@ class PostPagesTests(TestCase):
         )
         nothing = response.context['page_obj']
         self.assertNotEqual(nothing, new_users_post)
+
+    def test_user_cant_follow_himself(self):
+        """Нельзя подписаться на самого себя."""
+        response = self.authorized_client.get(
+            reverse(
+                'posts:follow',
+                kwargs={'username': f'{self.user.username}'}
+            )
+        )
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
