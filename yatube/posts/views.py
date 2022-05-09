@@ -36,12 +36,12 @@ def profile(request, username):
     num_of_posts = author.posts.all().count()
     posts = author.posts.order_by('-pub_date')
     page_obj = paginator(request, posts)
-    following = False
-    if request.user.is_authenticated and Follow.objects.filter(
+    following = (
+        request.user.is_authenticated and Follow.objects.filter(
             user=request.user,
             author=author
-    ).exists():
-        following = True
+        ).exists()
+    )
     context = {
         'author': author,
         'num_of_posts': num_of_posts,
@@ -53,7 +53,7 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     path = 'posts/post_detail.html'
-    form = CommentForm(request.POST or None)
+    form = CommentForm()
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comments.order_by('-created')
     context = {
@@ -130,8 +130,8 @@ def followings_posts(request):
 def author_follow(request, username):
     author = get_object_or_404(User, username=username)
     if not Follow.objects.filter(
-        user=request.user,
-        author=author
+            user=request.user,
+            author=author
     ).exists() and request.user != author:
         Follow.objects.create(
             user=request.user,
@@ -143,9 +143,12 @@ def author_follow(request, username):
 @login_required
 def author_unfollow(request, username):
     author = get_object_or_404(User, username=username)
-    follow_to_be_deleted = Follow.objects.get(
+    if Follow.objects.filter(
         user=request.user,
         author=author
-    )
-    follow_to_be_deleted.delete()
+    ).exists() and request.user != author:
+        Follow.objects.get(
+            user=request.user,
+            author=author
+        ).delete()
     return redirect('posts:profile', username=username)
