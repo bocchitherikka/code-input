@@ -3,34 +3,76 @@
 {% block title %}Об авторе проекта{% endblock %}
 {% block body %}
   <div class="container py-5">
-    <h1>Привет, я - автор</h1>
-    <p style="font-size:20px">
-      Привет, я - автор этого чуда мира IT. Я хотел бы расписать десять
-      абзацев текста, где рассказал бы о себе и всё такое, но я просто скажу,
-      что являюсь фанатом Викнда и прикреплю сюда его альбомы
-      <span style="color:#CC0033; font-weight:bold"> Starboy </span> и
-      <span style="color:#000066; font-weight:bold"> Dawn FM</span>.
+    <h1 style="color:#4B0082"> Привет, я - автор </h1>
+    <p style="font-size:23px">
+      Это мой первый проект, который я буду поддерживать и обновлять (по возможности).
+      Внизу я оставлю свои контакты и что-то типа резюме, вдруг я буду прикреплять этот
+      сайтец при попытке устроиться куда-то :D
     </p>
     <br>
-    <div class="row">
-      <div class="col-4">
-        <p style="font-size:28px; text-align:center">
-          <a href="https://music.youtube.com/playlist?list=OLAK5uy_nF6-ijLz9eO-DMZzhzneNclNBj74Jvjgo" target="_blank" style="text-decoration:none">
-            <img src="{% static 'about/dawn-fm.png' %}" width="300" height="300">
-            <br>
-            <span style="color:#000066; font-weight:bold; text-align:center">Dawn FM</span>
-          </a>
-        </p>
-      </div>
-      <div class="col-4">
-        <p style="font-size:28px; text-align:center">
-          <a href="https://music.youtube.com/playlist?list=OLAK5uy_nl-XrT4Q4vuhtuzHGfIuY5a0Rao4J8LdM" target="_blank" style="text-decoration:none">
-            <img src="{% static 'about/starboy.png' %}" width="300" height="300">
-            <br>
-            <span style="color:#CC0033; font-weight:bold">Starboy</span>
-          </a>
-        </p>
-      </div>
+    <div class="table-responsive" style="font-size:20px">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <th scope="row">
+              Образование
+            </th>
+            <td colspan="8">
+              Среднее полное (МОУ Гимназия №15 Советского района г.Волгограда).
+              <br>
+              Средний балл аттестата выше 4,3 (все отметки «хорошо» и «отлично»)
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              Владение языками
+            </th>
+            <td colspan="8">
+              Русский (родной), Английский (Intermediate, B1)
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              Компьютерные навыки
+            </th>
+            <td colspan="8">
+              1. Владею языком программирования Python на начальном уровне,
+              работал с Django, HTML, имею аккаунты на GitHub, PythonAnywhere.
+              Самостоятельно, в ходе обучения на онлайн курсах написал модуль фитнес-трекера,
+              эту <span style="color:#808080; font-size:13px"> весьма примитивную, но все же </span> соцсеть, API программу.
+              <br>
+              2. Уверенно работаю в продуктах
+              <img src="{% static 'about/office.png' %}" width="25" height="25">
+              <span style="color:#696969; font-weight:bold">Microsoft</span>
+              <span style="color:#FF4500; font-weight:bold">Office</span>
+              ( <img src="{% static 'about/word.png' %}" width="25" height="25">
+              <span style="color:#195FB1; font-weight:bold">Word</span>,
+              <img src="{% static 'about/excel.png' %}" width="25" height="25">
+              <span style="color:#0D7F46; font-weight:bold">Excel</span>,
+              <img src="{% static 'about/powerpoint.png' %}" width="25" height="25">
+              <span style="color:#D35131; font-weight:bold">PowerPoint</span>).
+              Знаком с
+              <img src="{% static 'about/videopad.png' %}" width="25" height="25">
+              <span style="color:#363A48; font-weight:bold">VideoPad Video Editor</span>,
+              <img src="{% static 'about/photoshop.png' %}" width="25" height="25">
+              <span style="color:#001833; font-weight:bold">Adobe Photoshop</span>,
+              <img src="{% static 'about/picsart.png' %}" width="25" height="25">
+              <span style="color:#ED02C2; font-weight:bold">Pi</span><span style="color:#B125C6; font-weight:bold">c</span><span style="color:#9142CA; font-weight:bold">s</span><span style="color:#656DCF; font-weight:bold">a</span><span style="color:#27C5DF; font-weight:bold">rt</span>.
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              Дополнительная информация
+            </th>
+            <td colspan="8">
+              Отличное знание русского языка (балл ЕГЭ по русскому языку ‒ 95). Могу проверять тексты на орфографические, грамматические,
+              пунктуационные, речевые и графические ошибки, корректировать готовые тексты и писать их с нуля.
+              <br>
+              Самостоятельно развиваю свои навыки в программировании в направлении Backend. Поступаю в НГУ на направление "Программная инженерия".
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 {% endblock %}
