@@ -7,6 +7,8 @@ SECRET_KEY = 'i9j!8u*x(c^v)ux4u!o)8*6psey2+7bndy7$m9ppozxn2a^mo$'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'www.rikka7.pythonanywhere.com',
+    'rikka7.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
     '[::1]',
