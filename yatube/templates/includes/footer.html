@@ -1,3 +1,11 @@
+{% load static %}
 <footer class="border-top text-center py-3">
-  <p style="font-weight:bold; font-size:16px">© {{ year }} Copyright <span style="color:#825897">Ya</span>tube</p>
+  <p style="font-weight:bold; font-size:18px">
+    Бондаренко Матвей Евгеньевич<br>
+    m.bondarenko.04@mail.ru<br>
+    <a href="https://t.me/rikka76">Я в Telegram</a>
+    <a href="https://t.me/rikka76"><img src="{% static 'includes/telegram.png' %}" width="25" height="25" class="vertical-align: middle"></a>
+  </p>
+  <br>
+  <p style="font-weight:bold; font-size:16px">© {{ year }} Copyright <span style="color:#630090; font-family: monospace">{code/input}</span></p>
 </footer>
